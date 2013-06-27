@@ -14,6 +14,9 @@ use Shutterbug::Rackapp do |config|
   config.phantom_bin_path = "/app/vendor/phantomjs/bin/phantomjs"
 end
 
-app = Rack::Directory.new "."
+
+app = proc do |env|
+  [200, { 'Content-Type' => 'text/html' }, ['move along']]
+end
 
 run app
