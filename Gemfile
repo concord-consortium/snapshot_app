@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 
-gem "shutterbug", :github  => 'concord-consortium/shutterbug', :tag => 'v0.0.7'
+gem "shutterbug", '~>0.0.9'
 gem 'rack-cors', :require => 'rack/cors'
