@@ -4,7 +4,7 @@ GEM
     rack (1.5.2)
     rack-cors (0.2.8)
       rack
-    shutterbug (0.0.9)
+    shutterbug (0.0.10)
       rack
 
 PLATFORMS
@@ -12,4 +12,4 @@ PLATFORMS
 
 DEPENDENCIES
   rack-cors
-  shutterbug (~> 0.0.9)
+  shutterbug (~> 0.0.10)
