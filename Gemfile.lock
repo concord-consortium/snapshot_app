@@ -12,4 +12,4 @@ PLATFORMS
 
 DEPENDENCIES
   rack-cors
-  shutterbug (~> 0.0.10)
+  shutterbug (~> 0.0.9)
