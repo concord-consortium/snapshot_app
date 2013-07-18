@@ -1,16 +1,10 @@
-GIT
-  remote: git://github.com/concord-consortium/shutterbug.git
-  revision: 8981d4d008a7fce87db751f5eb1aebfcab4c2e8b
-  tag: v0.0.7
-  specs:
-    shutterbug (0.0.7)
-      rack
-
 GEM
   remote: https://rubygems.org/
   specs:
     rack (1.5.2)
     rack-cors (0.2.8)
+      rack
+    shutterbug (0.0.9)
       rack
 
 PLATFORMS
@@ -18,4 +12,4 @@ PLATFORMS
 
 DEPENDENCIES
   rack-cors
-  shutterbug!
+  shutterbug (~> 0.0.9)
