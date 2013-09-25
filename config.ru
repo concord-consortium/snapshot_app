@@ -9,7 +9,7 @@ use Rack::Cors do
 end
 
 use Shutterbug::Rackapp do |config|
-  config.uri_prefix       = "http://shutterbug.herokuapp.com/"
+  config.uri_prefix       = "http://shutterbug-dev.herokuapp.com/"
   config.path_prefix      = "/shutterbug"
   config.phantom_bin_path = "/app/vendor/phantomjs/bin/phantomjs"
   config.s3_key           = ENV['S3_KEY']
