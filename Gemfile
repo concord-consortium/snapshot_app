@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
 
 gem 'unicorn'
-gem "shutterbug", '~>0.0.11'
+gem "shutterbug", '~>0.1.1'
 gem 'rack-cors', :require => 'rack/cors'
