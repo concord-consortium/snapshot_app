@@ -1,6 +1,8 @@
-
 require 'shutterbug'
 require 'rack/cors'
+require 'newrelic_rpm'
+require 'new_relic/agent/instrumentation/rack'
+
 use Rack::Cors do
   allow do
     origins '*'
