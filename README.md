@@ -2,7 +2,7 @@
 
 ### Overview
 
-This is a simple unicorn wrapper around [Shutterbug](https://github.com/concord-consortium/shutterbug), which makes Shutterbug available on Heroku.  This project also includes [buildpack references])(https://github.com/stomita/heroku-buildpack-phantomjs) for [PhantomJS](http://phantomjs.org/) dependencies.
+This is a simple unicorn wrapper around [Shutterbug](https://github.com/concord-consortium/shutterbug), which makes Shutterbug available on Heroku.  This project also includes buildpack references for [multi-build-pack](https://github.com/ddollar/heroku-buildpack-multi.git) and [phantom](https://github.com/stomita/heroku-buildpack-phantomjs) for [PhantomJS](http://phantomjs.org/) dependencies.
 
 ### Deploying &etc.
 
