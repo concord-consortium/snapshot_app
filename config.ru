@@ -1,7 +1,10 @@
 require 'shutterbug'
 require 'rack/cors'
-require 'newrelic_rpm'
-require 'new_relic/agent/instrumentation/rack'
+libdir = File.join(File.dirname(__FILE__),'lib')
+$LOAD_PATH.unshift(libdir) unless $LOAD_PATH.include?(libdir)
+require 'tracing.rb'
+
+enable_tracing()
 
 use Rack::Cors do
   allow do
