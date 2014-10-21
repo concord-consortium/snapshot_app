@@ -16,9 +16,11 @@ def enable_tracing
 
   to_trace.each do |clz,methods_ary|
     clz.class_eval do
+      clzname = clz.name.split("::").last
       include ::NewRelic::Agent::MethodTracer
       methods_ary.each do |method_symbol|
-        add_method_tracer method_symbol
+        trace_name = [clzname, method_symbol.to_s].join("#")
+        add_method_tracer method_symbol, trace_name
       end
     end  
   end
