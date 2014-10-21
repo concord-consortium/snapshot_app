@@ -10,8 +10,8 @@ def enable_tracing
     Shutterbug::Handlers::FileHandlers::HtmlFile => [:handle],
     Shutterbug::Storage::S3Storage               => [:get_content, :initialize],
     Shutterbug::Storage::FileStorage             => [:get_content, :initialize],
-    Shutterbug::PhantomJob              => [:rasterize],
-    Shutterbug::CacheManager::NoCache            => [:find, :add_entry]
+    Shutterbug::PhantomJob                       => [:rasterize, :initialize],
+    Shutterbug::CacheManager::NoCache            => [:find, :add_entry, :initialize]
   }
 
   to_trace.each do |clz,methods_ary|
