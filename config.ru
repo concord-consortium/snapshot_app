@@ -22,9 +22,7 @@ use Shutterbug::Rackapp do |config|
   config.s3_bin           = "ccshutterbugtest"
 end
 
-
-app = proc do |env|
-  [200, { 'Content-Type' => 'text/html' }, ['move along']]
-end
+# app = proc { |env| [200, { 'Content-Type' => 'text/html' }, ['move along']] }
+app = Rack::Directory.new "demo"
 
 run app
