@@ -2,6 +2,9 @@
 
 FROM ubuntu:14.04
 
+ENV PORT 8888
+ENV SB_PHANTOM_BIN /usr/bin/phantomjs
+
 MAINTAINER knowuh@gmail.com
 
 # Base Ruby stuff:
@@ -18,10 +21,8 @@ RUN gem install bundler
 
 # For phantomjs
 RUN apt-get install -y phantomjs
-ENV SB_PHANTOM_BIN /usr/bin/phantomjs
 
 USER webapp
-ENV PORT 8888
 
 # Update our gems, and cache it, see:
 # see : http://bit.ly/1FrHZyn 
@@ -30,23 +31,24 @@ ADD Gemfile Gemfile
 ADD Gemfile.lock  Gemfile.lock
 RUN bundle install
 
-WORKDIR /home/webapp
-ADD config config
-ADD demo demo
-ADD lib lib
-ADD config.ru config.ru
-ADD Gemfile Gemfile
-ADD Gemfile.lock  Gemfile.lock
-ADD unicorn.rb unicorn.rb
+WORKDIR /home/webapp/
+ADD config         /home/webapp/config
+ADD demo           /home/webapp/demo
+ADD lib            /home/webapp/lib
+ADD config.ru      /home/webapp/config.ru
+ADD Gemfile        /home/webapp/Gemfile
+ADD Gemfile.lock   /home/webapp/Gemfile.lock
+ADD unicorn.rb     /home/webapp/unicorn.rb
 
-VOLUME ["/home/webapp/log"]
+# TODO add volumes if needed
+# VOLUME ["/home/webapp/log"]
 
 # Define default command.
 # docker run -d -p 80:8888 knowuh/ruby193
 CMD bundle exec unicorn -p 8888 -c ./unicorn.rb
 
 # Expose ports.
-EXPOSE 8888
+EXPOSE $PORT
 
 # ENV needs:
 # NEW_RELIC_LICENSE_KEY
