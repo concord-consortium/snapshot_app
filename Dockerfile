@@ -48,7 +48,7 @@ ADD unicorn.rb     /home/webapp/unicorn.rb
 CMD bundle exec unicorn -p 8888 -c ./unicorn.rb
 
 # Expose ports.
-EXPOSE $PORT
+EXPOSE 8888
 
 # ENV needs:
 # NEW_RELIC_LICENSE_KEY
