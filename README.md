@@ -4,7 +4,46 @@
 
 This is a simple unicorn wrapper around [Shutterbug](https://github.com/concord-consortium/shutterbug), which makes Shutterbug available on Heroku.  This project also includes buildpack references for [multi-build-pack](https://github.com/ddollar/heroku-buildpack-multi.git) and [phantom](https://github.com/stomita/heroku-buildpack-phantomjs) for [PhantomJS](http://phantomjs.org/) dependencies.
 
-### Deploying &etc.
+### Docker Deploying Locally ###
+
+1. install boot2docker
+2. work around some existing [NTP boot2docker issues](https://github.com/boot2docker/boot2docker/issues/290) using either:
+     
+        boot2docker ssh "sudo killall -9 ntpd && sudo ntpclient -s -h pool.ntp.org && sudo ntpd -p pool.ntp.org"` 
+
+     *or*
+
+        wget -q https://gist.githubusercontent.com/fcvarela/2c90b090e1e5f8c91127/raw/1e63833d4ec7edea98298204a0c26f79ead3db8e/com.fcvarela.boot2docker.datesync.plist -O \
+        ~/Library/LaunchAgents/com.fcvarela.boot2docker.datesync.plist \
+        && launchctl load ~/Library/LaunchAgents/com.fcvarela.boot2docker.datesync.plist \
+        && launchctl start com.fcvarela.boot2docker.datesync
+
+3. generate the docker image `docker build -t knowuh/snapshot_app .` (knowuh/snapshot_app is what I have 'tagged' my local image as … TBD)
+4. find the local IP address of your docker server: `boot2docker ip`
+4. Run the image, forwarding ports, and configuring ENV vars
+
+        docker run \
+        -e "S3_KEY=xxxxxxx" \
+        -e "S3_SECRET=xxxxxx" \
+        -e "S3_BIN=ccshutterbug" \
+        -e "SB_SNAP_URI=http://<docker local ip>/" \
+        -d -p 80:8888 knowuh/snapshot_app
+
+### Docker Deploying Locally with FIG ###
+
+TBD
+
+### Deploying to Amazon Elastic Beanstalk using EB CLI ###
+
+The following summarizes a much more [detailed instructions hosted on AWS](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb-cli3-getting-set-up.html)
+
+1. Install the client: `sudo pip install awsebcli`
+2. Initialize the project `eb init`
+3. Create a deployment `eb create development`
+4. Change code, commit, and redeploy: `eb deploy`
+
+
+### Heroku Deploying &etc.
 
 Deployment to heroku is done using git push.  We configure 3 remotes in git:
 
