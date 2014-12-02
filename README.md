@@ -4,9 +4,20 @@
 
 This is a simple unicorn wrapper around [Shutterbug](https://github.com/concord-consortium/shutterbug), which makes Shutterbug available on Heroku.  This project also includes buildpack references for [multi-build-pack](https://github.com/ddollar/heroku-buildpack-multi.git) and [phantom](https://github.com/stomita/heroku-buildpack-phantomjs) for [PhantomJS](http://phantomjs.org/) dependencies.
 
-### Docker Deploying Locally ###
+### Deploying with Docker locally using Fig ###
 
-1. install boot2docker
+1. Install [boot2docker](https://github.com/boot2docker/osx-installer/releases)
+2. Install Fig `sudo pip install fig`
+3. Run `boot2docker up`
+4. Copy the IP address from `boot2docker ip` into `/etc/hosts` as some alias.  The ip address of the boot2docker host isn't likely to change very frequently.
+5. Export your AWS S3 credentials. `export S3_KEY=xxx`, `export S3_SECRET=xxx`
+6. Run `fig up`
+7. Run `open http://<dockerip-or-alias>:8888/index.html` 
+
+### Docker: deploying locally ###
+
+1. install [boot2docker](https://github.com/boot2docker/osx-installer/releases)
+2. run `boot2docker up`
 2. work around some existing [NTP boot2docker issues](https://github.com/boot2docker/boot2docker/issues/290) using either:
      
         boot2docker ssh "sudo killall -9 ntpd && sudo ntpclient -s -h pool.ntp.org && sudo ntpd -p pool.ntp.org"` 
@@ -29,15 +40,12 @@ This is a simple unicorn wrapper around [Shutterbug](https://github.com/concord-
         -e "SB_SNAP_URI=http://<docker local ip>/" \
         -d -p 80:8888 knowuh/snapshot_app
 
-### Docker Deploying Locally with FIG ###
-
-TBD
 
 ### Deploying to Amazon Elastic Beanstalk using EB CLI ###
 
 The following summarizes a much more [detailed instructions hosted on AWS](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb-cli3-getting-set-up.html)
 
-1. Install the client: `sudo pip install awsebcli`
+1. Install the EBS command line client: `sudo pip install awsebcli`
 2. Initialize the project `eb init`
 3. Create a deployment `eb create development`
 4. Change code, commit, and redeploy: `eb deploy`

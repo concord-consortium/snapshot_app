@@ -1,0 +1,9 @@
+web:
+  build: .
+  ports:
+    - "8888:8888"
+  environment:
+    S3_BIN: ccshutterbug
+    S3_KEY:
+    S3_SECRET:
+    SB_SNAP_URI:
