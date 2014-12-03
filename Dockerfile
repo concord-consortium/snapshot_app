@@ -13,9 +13,18 @@ RUN adduser --home /home/webapp --disabled-password --gecos '' webapp &&\
     echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 RUN apt-get update &&\
-    apt-get install -y build-essential checkinstall
+    apt-get install -y wget build-essential checkinstall zlib1g-dev libssl-dev libreadline6-dev libyaml-dev
 
-RUN apt-get install -y ruby1.9.3
+WORKDIR /tmp
+RUN wget http://ftp.ruby-lang.org/pub/ruby/2.1/ruby-2.1.5.tar.gz && \
+  tar -xvzf ruby-2.1.5.tar.gz
+
+WORKDIR /tmp/ruby-2.1.5
+RUN ./configure --prefix=/usr/local && \
+ make &&\
+ make install
+WORKDIR /tmp
+RUN rm -rf /tmp/ruby-2.1.5
 
 RUN gem install bundler
 
