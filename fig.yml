@@ -9,3 +9,4 @@ web:
     S3_KEY:
     S3_SECRET:
     SB_SNAP_URI:
+    SB_WORKERS:
