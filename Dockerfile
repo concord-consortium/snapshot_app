@@ -13,7 +13,7 @@ RUN adduser --home /home/webapp --disabled-password --gecos '' webapp &&\
     echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 RUN apt-get update &&\
-    apt-get install -y wget build-essential checkinstall zlib1g-dev libssl-dev libreadline6-dev libyaml-dev git
+    apt-get install -y wget build-essential checkinstall zlib1g-dev libssl-dev libreadline6-dev libyaml-dev
 
 WORKDIR /tmp
 RUN wget http://ftp.ruby-lang.org/pub/ruby/2.1/ruby-2.1.5.tar.gz && \
