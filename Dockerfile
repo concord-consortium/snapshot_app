@@ -1,43 +1,27 @@
 # snapshot server, version 0.0 
 
-FROM ubuntu:14.04
+FROM knowuh/cc-ruby2-dev
 
 ENV PORT 8888
 ENV SB_PHANTOM_BIN /usr/bin/phantomjs
+ENV HOME /home/webapp
 
-MAINTAINER knowuh@gmail.com
+# For phantomjs
+RUN apt-get update &&\
+    apt-get install -y phantomjs &&\
+    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Base Ruby stuff:
 RUN adduser --home /home/webapp --disabled-password --gecos '' webapp &&\
     adduser webapp sudo &&\
     echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
-RUN apt-get update &&\
-    apt-get install -y wget build-essential checkinstall zlib1g-dev libssl-dev libreadline6-dev libyaml-dev
-
+# Update our gems, and cache it, see:  http://bit.ly/1FrHZyn 
 WORKDIR /tmp
-RUN wget http://ftp.ruby-lang.org/pub/ruby/2.1/ruby-2.1.5.tar.gz && \
-  tar -xvzf ruby-2.1.5.tar.gz
-
-WORKDIR /tmp/ruby-2.1.5
-RUN ./configure --prefix=/usr/local && \
- make &&\
- make install
-WORKDIR /tmp
-RUN rm -rf /tmp/ruby-2.1.5
-
-RUN gem install bundler
-
-# For phantomjs
-RUN apt-get install -y phantomjs
-
+ADD Gemfile /tmp/Gemfile
+ADD Gemfile.lock  /tmp/Gemfile.lock
+RUN chown webapp /tmp/Gemfile
+RUN chown webapp /tmp/Gemfile.lock
 USER webapp
-
-# Update our gems, and cache it, see:
-# see : http://bit.ly/1FrHZyn 
-WORKDIR /tmp
-ADD Gemfile Gemfile
-ADD Gemfile.lock  Gemfile.lock
 RUN bundle install
 
 WORKDIR /home/webapp/
@@ -49,17 +33,21 @@ ADD Gemfile        /home/webapp/Gemfile
 ADD Gemfile.lock   /home/webapp/Gemfile.lock
 ADD unicorn.rb     /home/webapp/unicorn.rb
 
+RUN sudo chown -R webapp /home/webapp
+
+
 # TODO add volumes if needed
 # VOLUME ["/home/webapp/log"]
 
-# Define default command.
-# docker run -d -p 80:8888 knowuh/ruby193
+# # Expose ports.
+# EXPOSE 8888
+
+# # Define default command.
+# # docker run -d -p 80:8888 knowuh/ruby193
 CMD bundle exec unicorn -p 8888 -c ./unicorn.rb
 
-# Expose ports.
-EXPOSE 8888
 
-# ENV needs:
+# NOTE ENV needs:
 # NEW_RELIC_LICENSE_KEY
 # S3_BIN
 # S3_SECRET
