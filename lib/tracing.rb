@@ -6,8 +6,8 @@ def enable_tracing
   to_trace = {
     Shutterbug::Handlers::ConvertHandler         => [:handle, :convert],
     Shutterbug::Handlers::JsFileHandler          => [:handle],
-    Shutterbug::Handlers::FileHandlers::PngFile  => [:handle],
-    Shutterbug::Handlers::FileHandlers::HtmlFile => [:handle],
+    Shutterbug::Handlers::FileHandler            => [:handle],
+    Shutterbug::Handlers::DirectUploadHandler    => [:handle],
     Shutterbug::Storage::S3Storage               => [:get_content, :initialize],
     Shutterbug::Storage::FileStorage             => [:get_content, :initialize],
     Shutterbug::PhantomJob                       => [:rasterize, :initialize],

@@ -21,7 +21,7 @@ GEM
       ipaddress (~> 0.5)
       nokogiri (~> 1.5, >= 1.5.11)
       opennebula
-    fog-brightbox (0.7.0)
+    fog-brightbox (0.7.1)
       fog-core (~> 1.22)
       fog-json
       inflecto (~> 0.0.2)
@@ -86,7 +86,7 @@ GEM
       builder
       nokogiri (>= 1.4.1)
       trollop
-    shutterbug (0.2.5)
+    shutterbug (0.4.3)
       fog
       rack
     trollop (2.0)
@@ -101,5 +101,5 @@ PLATFORMS
 DEPENDENCIES
   newrelic_rpm
   rack-cors
-  shutterbug (~> 0.2.5)
+  shutterbug (~> 0.4.3)
   unicorn
