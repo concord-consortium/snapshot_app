@@ -20,7 +20,7 @@ This is a simple unicorn wrapper around [Shutterbug](https://github.com/concord-
 2. run `boot2docker up`
 2. work around some existing [NTP boot2docker issues](https://github.com/boot2docker/boot2docker/issues/290) using either:
      
-        boot2docker ssh "sudo killall -9 ntpd && sudo ntpclient -s -h pool.ntp.org && sudo ntpd -p pool.ntp.org"` 
+        boot2docker ssh "sudo killall -9 ntpd; sudo ntpclient -s -h pool.ntp.org && sudo ntpd -p pool.ntp.org"
 
      *or*
 
