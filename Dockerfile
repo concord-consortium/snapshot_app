@@ -40,7 +40,7 @@ RUN sudo chown -R webapp /home/webapp
 # VOLUME ["/home/webapp/log"]
 
 # # Expose ports.
-# EXPOSE 8888
+EXPOSE 8888
 
 # # Define default command.
 # # docker run -d -p 80:8888 knowuh/ruby193
