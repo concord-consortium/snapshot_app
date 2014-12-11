@@ -86,7 +86,7 @@ GEM
       builder
       nokogiri (>= 1.4.1)
       trollop
-    shutterbug (0.4.3)
+    shutterbug (0.5.0)
       fog
       rack
     trollop (2.0)
@@ -101,5 +101,5 @@ PLATFORMS
 DEPENDENCIES
   newrelic_rpm
   rack-cors
-  shutterbug (~> 0.4.3)
+  shutterbug (~> 0.5.0)
   unicorn
