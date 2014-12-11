@@ -5,7 +5,6 @@ require 'new_relic/agent/method_tracer'
 def enable_tracing
   to_trace = {
     Shutterbug::Handlers::ConvertHandler         => [:handle, :convert],
-    Shutterbug::Handlers::JsFileHandler          => [:handle],
     Shutterbug::Handlers::FileHandler            => [:handle],
     Shutterbug::Handlers::DirectUploadHandler    => [:handle],
     Shutterbug::Storage::S3Storage               => [:get_content, :initialize],
