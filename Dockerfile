@@ -35,20 +35,18 @@ ADD unicorn.rb     /home/webapp/unicorn.rb
 
 RUN sudo chown -R webapp /home/webapp
 
-
 # TODO add volumes if needed
 # VOLUME ["/home/webapp/log"]
 
-# # Expose ports.
+# Expose ports.
 EXPOSE 8888
 
-# # Define default command.
-# # docker run -d -p 80:8888 knowuh/ruby193
+# Define the default run command for this image
+# use like `docker run -d -p 80:8888 <this image name>`
 CMD bundle exec unicorn -p 8888 -c ./unicorn.rb
 
-
-# NOTE ENV needs:
-# NEW_RELIC_LICENSE_KEY
-# S3_BIN
-# S3_SECRET
-# S3_KEY
+# NOTE: ENV expects to find:
+#   * NEW_RELIC_LICENSE_KEY
+#   * S3_BIN
+#   * S3_SECRET
+#   * S3_KEY
