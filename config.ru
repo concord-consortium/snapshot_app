@@ -14,12 +14,13 @@ use Rack::Cors do
 end
 
 use Shutterbug::Rackapp do |config|
-  config.uri_prefix       = ENV['SB_SNAP_URI']     # default == use local
-  config.path_prefix      = ENV['SB_PATH_PREFIX'] || "/shutterbug"
-  config.phantom_bin_path = ENV['SB_PHANTOM_BIN'] || "/app/vendor/phantomjs/bin/phantomjs"
-  config.s3_key           = ENV['S3_KEY']
-  config.s3_secret        = ENV['S3_SECRET']
-  config.s3_bin           = ENV['S3_BIN']
+  config.uri_prefix         = ENV['SB_SNAP_URI']     # default == use local
+  config.path_prefix        = ENV['SB_PATH_PREFIX'] || "/shutterbug"
+  config.phantom_bin_path   = ENV['SB_PHANTOM_BIN'] || "/app/vendor/phantomjs/bin/phantomjs"  
+  config.s3_key             = ENV['S3_KEY']
+  config.s3_secret          = ENV['S3_SECRET']
+  config.s3_bin             = ENV['S3_BIN']
+  config.skip_direct_upload = ENV['SB_SKIP_DIRECT_UPLOAD']
 end
 
 # app = proc { |env| [200, { 'Content-Type' => 'text/html' }, ['move along']] }
