@@ -82,4 +82,7 @@ or just `push heroku-dev master` if you are just deploying the master branch.
 When you are ready for the bigtime: `push heroku master`.
 
 ----
-[MIT License](LICENSE.md)
+
+### License: ###
+
+SnapshotApp is released under the [MIT License.](LICENSE.md)
