@@ -1,16 +1,12 @@
 # snapshot server, version 0.0 
 
-FROM knowuh/cc-ruby2-dev
+FROM knowuh/cc-ruby2-phantom2
 
 ENV PORT 8888
 ENV SB_PHANTOM_BIN /usr/bin/phantomjs
 ENV HOME /home/webapp
 
-# For phantomjs
-RUN apt-get update &&\
-    apt-get install -y phantomjs &&\
-    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
+# add user info
 RUN adduser --home /home/webapp --disabled-password --gecos '' webapp &&\
     adduser webapp sudo &&\
     echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
