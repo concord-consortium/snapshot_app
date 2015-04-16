@@ -1,9 +1,11 @@
 web:
   build: .
   ports:
-    - "8888:8888"
+    - "80:8888"
   volumes:
     - .:/home/webapp/
+  env_file:
+    - .env
   environment:
     S3_BIN: ccshutterbug
     S3_KEY:

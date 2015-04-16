@@ -7,3 +7,5 @@ newrelic_agent.log
 !.elasticbeanstalk/*.global.yml
 .cache
 .env
+.bash_history
+.python_history

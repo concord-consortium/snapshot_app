@@ -2,43 +2,21 @@
 
 ### Overview
 
-This is a simple unicorn wrapper around [Shutterbug](https://github.com/concord-consortium/shutterbug), which makes Shutterbug available on Heroku.  This project also includes buildpack references for [multi-build-pack](https://github.com/ddollar/heroku-buildpack-multi.git) and [phantom](https://github.com/stomita/heroku-buildpack-phantomjs) for [PhantomJS](http://phantomjs.org/) dependencies.
+This is a simple unicorn wrapper around [Shutterbug](https://github.com/concord-consortium/shutterbug), which makes Shutterbug available on Heroku.  This project also includes DEPRECATED buildpack references for [multi-build-pack](https://github.com/ddollar/heroku-buildpack-multi.git) and [phantom](https://github.com/stomita/heroku-buildpack-phantomjs) for [PhantomJS](http://phantomjs.org/) dependencies.
 
-### Deploying with Docker locally using Fig ###
+### Testing locally using docker-compose ###
 
 1. Install [boot2docker](https://github.com/boot2docker/osx-installer/releases)
-2. Install Fig `sudo pip install fig`
+2. Install docker-compose ``curl -L https://github.com/docker/compose/releases/download/1.1.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose``
 3. Run `boot2docker up`
 4. Copy the IP address from `boot2docker ip` into `/etc/hosts` as some alias.  The ip address of the boot2docker host isn't likely to change very frequently.
-5. Export your AWS S3 credentials. `export S3_KEY=xxx`, `export S3_SECRET=xxx`
-6. Run `fig up`
-7. Run `open http://<dockerip-or-alias>:8888/index.html` 
-
-### Docker: deploying locally ###
-
-1. install [boot2docker](https://github.com/boot2docker/osx-installer/releases)
-2. run `boot2docker up`
-2. work around some existing [NTP boot2docker issues](https://github.com/boot2docker/boot2docker/issues/290) using either:
-     
-        boot2docker ssh "sudo killall -9 ntpd; sudo ntpclient -s -h pool.ntp.org && sudo ntpd -p pool.ntp.org"
-
-     *or*
-
-        wget -q https://gist.githubusercontent.com/fcvarela/2c90b090e1e5f8c91127/raw/1e63833d4ec7edea98298204a0c26f79ead3db8e/com.fcvarela.boot2docker.datesync.plist -O \
-        ~/Library/LaunchAgents/com.fcvarela.boot2docker.datesync.plist \
-        && launchctl load ~/Library/LaunchAgents/com.fcvarela.boot2docker.datesync.plist \
-        && launchctl start com.fcvarela.boot2docker.datesync
-
-3. generate the docker image `docker build -t knowuh/snapshot_app .` (knowuh/snapshot_app is what I have 'tagged' my local image as … TBD)
-4. find the local IP address of your docker server: `boot2docker ip`
-4. Run the image, forwarding ports, and configuring ENV vars
-
-        docker run \
-        -e "S3_KEY=xxxxxxx" \
-        -e "S3_SECRET=xxxxxx" \
-        -e "S3_BIN=ccshutterbug" \
-        -e "SB_SNAP_URI=http://<docker local ip>/" \
-        -d -p 80:8888 knowuh/snapshot_app
+5. Export your AWS S3 credentials. `export S3_KEY=xxx`, `export S3_SECRET=xxx` or put your credentials in `./.env` here.
+6. Build your image `docker-compose build`
+7. Run your container `docker-compose up`
+8. Run `open http://<dockerip-or-alias>:80/index.html` 
+9. You can run one-of commands in your named containers like this: `docker-compose run web bash`
+10. read more [docker-compose documentation](https://docs.docker.com/compose/) for more info.
+11. because we mount a volume in the container, changes to this working directory are reflected in the container immediately.
 
 
 ### Deploying to Amazon Elastic Beanstalk using EB CLI ###
@@ -51,7 +29,7 @@ The following summarizes a much more [detailed instructions hosted on AWS](https
 4. Change code, commit, and redeploy: `eb deploy`
 
 
-### Heroku Deploying &etc.
+### Heroku Deploying (mostly deprecated)
 
 Deployment to heroku is done using git push.  We configure 3 remotes in git:
 
