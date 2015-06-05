@@ -13,7 +13,7 @@ This is a simple unicorn wrapper around [Shutterbug](https://github.com/concord-
 5. Export your AWS S3 credentials. `export S3_KEY=xxx`, `export S3_SECRET=xxx` or put your credentials in `./.env` here.
 6. Build your image `docker-compose build`
 7. Run your container `docker-compose up`
-8. Run `open http://<dockerip-or-alias>:80/index.html` 
+8. Run `open http://<dockerip-or-alias>:80/index.html`
 9. You can run one-of commands in your named containers like this: `docker-compose run web bash`
 10. read more [docker-compose documentation](https://docs.docker.com/compose/) for more info.
 11. because we mount a volume in the container, changes to this working directory are reflected in the container immediately.
@@ -25,8 +25,9 @@ The following summarizes a much more [detailed instructions hosted on AWS](https
 
 1. Install the EBS command line client: `sudo pip install awsebcli`
 2. Initialize the project `eb init`
-3. Create a deployment `eb create development`
-4. Change code, commit, and redeploy: `eb deploy`
+3. Create a deployment environment (unless one exists for you) `eb create my-dev`
+4. Tell EB to use the environment `eb use snapshotApp-dev`
+5. Change code, commit, and redeploy: `eb deploy`
 
 
 ### Heroku Deploying (mostly deprecated)
@@ -54,7 +55,7 @@ You should have a `.git/config` file which looks sort of like this, so that you 
 
 When you want to push changes from master to github `git push` should do the right thing.
 
-When you want to deploy to staging: `push heroku-dev <branch>:master` will do the job 
+When you want to deploy to staging: `push heroku-dev <branch>:master` will do the job
 or just `push heroku-dev master` if you are just deploying the master branch.
 
 When you are ready for the bigtime: `push heroku master`.
